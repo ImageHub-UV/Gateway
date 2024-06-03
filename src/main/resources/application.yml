@@ -1,6 +1,8 @@
 spring:
   cloud:
     gateway:
+      default-filters:
+        - name: LoggingFilter
       routes:
         - id: msvc-shoppingcart
           uri: lb://msvc-shoppingcart
@@ -8,9 +10,15 @@ spring:
             - Path=/api/shoppingcart/**
           filters:
             - StripPrefix=2
-        - id: getial
-          uri: lb://getial
+        - id: images-service-service
+          uri: lb://images-service-service
           predicates:
-            - Path=/api/getial/**
+            - Path=/api/images/**
+          filters:
+            - StripPrefix=2
+        - id: user-msvc-service
+          uri: lb://user-msvc-service
+          predicates:
+            - Path=/api/user/**
           filters:
             - StripPrefix=2
