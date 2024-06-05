@@ -22,3 +22,9 @@ spring:
             - Path=/api/user/**
           filters:
             - StripPrefix=2
+        - id: payment-msvc-service
+          uri: lb://payment-msvc-service
+          predicates:
+            - Path=/api/order/**
+          filters:
+            - StripPrefix=2
