@@ -1,0 +1,30 @@
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - name: LoggingFilter
+      routes:
+        - id: msvc-shoppingcart
+          uri: lb://msvc-shoppingcart
+          predicates:
+            - Path=/api/shoppingcart/**
+          filters:
+            - StripPrefix=2
+        - id: images-service-service
+          uri: lb://images-service-service
+          predicates:
+            - Path=/api/images/**
+          filters:
+            - StripPrefix=2
+        - id: user-msvc-service
+          uri: lb://user-msvc-service
+          predicates:
+            - Path=/api/user/**
+          filters:
+            - StripPrefix=2
+        - id: payment-msvc-service
+          uri: lb://payment-msvc-service
+          predicates:
+            - Path=/api/order/**
+          filters:
+            - StripPrefix=2
